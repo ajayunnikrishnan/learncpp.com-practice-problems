@@ -1,0 +1,29 @@
+#include <cmath> // for std::abs
+#include <algorithm> // for std::max
+#include <iostream>
+
+// return true if the diffrence between a and b is within epsilon percent of the larger of a and b
+bool approximatelyEqualRel(double a, double b, double relEpsilon)
+{
+  return ( std::abs( a - b ) <= std::max(a, b) * relEpsilon );
+}
+
+int main()
+{
+  // should exqual 1 but does not due to rounding errors
+  constexpr double a { 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 };
+
+  constexpr double relEpsilon { 1e-8 };
+
+  std::cout << std::boolalpha;
+
+  // comparing almost 1.0 to 1.0
+  std::cout << approximatelyEqualRel(a, 1.0, relEpsilon) << '\n';
+
+  // comparing almost 0.0 to 0.0
+  // outup gives false as comparison becomes innacurate approaching 0
+  std::cout << approximatelyEqualRel(1.0 - a, 0.0, relEpsilon) << '\n';
+
+  return 0;
+
+}
