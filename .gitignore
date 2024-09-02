@@ -1,0 +1,9 @@
+# Ignore binary executables
+
+*.exe
+*.dll
+*.so
+*.o
+*.obj
+*.a
+*.out
